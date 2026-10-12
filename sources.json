@@ -1,0 +1,45 @@
+{
+  "facebook_groups": [
+    {
+      "name": "Cho Thuê Nhà Nguyên Căn Đà Nẵng",
+      "url": "https://www.facebook.com/groups/nhanguyencandanang/",
+      "target_categories": ["nhà cấp 4", "nhà nguyên căn giá rẻ"]
+    },
+    {
+      "name": "Tìm Phòng Trọ Đà Nẵng Giá Rẻ",
+      "url": "https://www.facebook.com/groups/timphongtrodanang/",
+      "target_categories": ["phòng trọ khép kín", "không chung chủ"]
+    },
+    {
+      "name": "Căn Hộ Phòng Trọ Đà Nẵng",
+      "url": "https://www.facebook.com/groups/canhophongtrodanang/",
+      "target_categories": ["studio", "căn hộ mini"]
+    }
+  ],
+  "web_platforms": [
+    {
+      "name": "Chợ Tốt (Nhà Tốt) - Phòng trọ Hải Châu",
+      "url": "https://www.nhatot.com/thue-phong-tro-quan-hai-chau-da-nang"
+    },
+    {
+      "name": "Chợ Tốt (Nhà Tốt) - Phòng trọ Cẩm Lệ",
+      "url": "https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang"
+    },
+    {
+      "name": "Chợ Tốt (Nhà Tốt) - Phòng trọ Thanh Khê",
+      "url": "https://www.nhatot.com/thue-phong-tro-quan-thanh-khe-da-nang"
+    },
+    {
+      "name": "Chợ Tốt (Nhà Tốt) - Thuê nhà đất Liên Chiểu / Hòa Khánh",
+      "url": "https://www.nhatot.com/thue-nha-dat-quan-lien-chieu-da-nang"
+    },
+    {
+      "name": "Phongtro123 - Phòng trọ Đà Nẵng",
+      "url": "https://phongtro123.com/tinh-thanh/da-nang"
+    },
+    {
+      "name": "Batdongsan.com.vn - Nhà trọ Đà Nẵng",
+      "url": "https://batdongsan.com.vn/nha-tro-phong-tro-da-nang"
+    }
+  ]
+}

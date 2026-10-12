@@ -1,0 +1,55 @@
+{
+  "project_name": "Hệ thống Tìm kiếm & Đánh giá Phòng trọ/Nhà cấp 4 Đà Nẵng",
+  "version": "2.2",
+  "data_quality_gates": {
+    "require_live_canonical_url": true,
+    "require_contact_phone": true,
+    "require_clear_address": true,
+    "require_verified_time": true,
+    "disallow_placeholders": true,
+    "description": "CHỐNG ẢO TRIỆT ĐỂ: Chỉ lưu vào Sheet 2 và HTML Dashboard các bài đăng có link thật đang hoạt động, có số điện thoại liên hệ, có địa chỉ cụ thể và thời gian xác thực <= 7 ngày."
+  },
+  "search_criteria": {
+    "scope": "Toàn thành phố Đà Nẵng (Ưu tiên Hải Châu, Cẩm Lệ, Thanh Khê, Liên Chiểu)",
+    "budget_filter_ranges": [
+      { "label": "Dưới 2.0M", "min": 0, "max": 2000000 },
+      { "label": "2.0M - 2.5M", "min": 2000000, "max": 2500000 },
+      { "label": "Trên 2.5M", "min": 2500000, "max": 99999999 }
+    ],
+    "housing_categories": [
+      "Nhà cấp 4 nguyên căn độc lập",
+      "Phòng trọ riêng biệt khép kín có gác/lối đi riêng",
+      "Căn hộ mini / Studio khép kín"
+    ],
+    "tenant_preference_tags": [
+      "Cho phép nuôi thú cưng (Pet-friendly)",
+      "Giờ giấc tự do / Không chung chủ",
+      "Có điều hòa / Nóng lạnh"
+    ],
+    "strictly_forbidden_types": [
+      "sleepbox",
+      "bedbox",
+      "capsule",
+      "ký túc xá",
+      "dorm",
+      "phòng ghép ngủ chung",
+      "ở chung với chủ"
+    ],
+    "time_window_rule": {
+      "max_age_days": 7,
+      "description": "CHẶN CỨNG: Tuyệt đối không lấy bài đăng cũ hơn 7 ngày (1 tuần). Bài > 7 ngày coi như đã hết phòng và loại bỏ 100% khỏi Sheet 2.",
+      "priority_tag_24h": "🆕"
+    }
+  },
+  "storage_paths": {
+    "html_dashboard": "D:/Gom/Em yêu khoa học/Tìm Phòng trọ/dashboard_phong_tro.html",
+    "excel_master": "D:/Gom/Em yêu khoa học/Tìm Phòng trọ/phong_tro_da_nang.xls",
+    "csv_sheet1_raw": "D:/Gom/Em yêu khoa học/Tìm Phòng trọ/phong_tro_da_nang_Sheet1_Goc.csv",
+    "csv_sheet2_qualified": "D:/Gom/Em yêu khoa học/Tìm Phòng trọ/phong_tro_da_nang_Sheet2_DatChuan.csv",
+    "google_sheet_sync_url": "https://docs.google.com/spreadsheets/d/1gYYgPiQJ_eLjBU8YbuNSGa1hBW7sLq0m68WI66FEcZU/edit?usp=sharing"
+  },
+  "cleanup_policy": {
+    "schedule": "Chủ Nhật hàng tuần lúc 24:00",
+    "action": "Dọn dẹp các tin từ Thứ 2 đến hết Thứ 5 (các tin cũ hơn 3 ngày), chỉ giữ lại tin Thứ 6 đến Chủ Nhật."
+  }
+}

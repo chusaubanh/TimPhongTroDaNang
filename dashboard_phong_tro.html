@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đà Nẵng Rental Finder · Workspace Khảo Sát Thực Tế</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Palette: Cold Luxury / Architectural Slate & Champagne */
+      --bg: #090a0d;
+      --surface-1: #101217;
+      --surface-2: #161921;
+      --surface-3: #1d212b;
+      --surface-hover: #212633;
+      --surface-active: #262c3b;
+      
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.12);
+      --border-focus: rgba(212, 175, 55, 0.4);
+      
+      /* Refined Accent: Muted Champagne Gold (#d4af37 subdued to #e0c080 / #c7a76d) */
+      --accent: #cbb281;
+      --accent-dim: rgba(203, 178, 129, 0.15);
+      --accent-hover: #dfc899;
+      
+      /* Status */
+      --c4-pill: #e07a5f;
+      --verified: #81b29a;
+      --price-tag: #f4f1de;
+      --warning: #e9c46a;
+
+      /* Typography */
+      --text-main: #f8fafc;
+      --text-body: #94a3b8;
+      --text-muted: #64748b;
+      --text-dim: #475569;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 32px 28px 80px 28px;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(circle at 50% 0%, rgba(203, 178, 129, 0.03) 0%, transparent 60%);
+    }
+
+    .layout-wrapper {
+      max-width: 1480px;
+      margin: 0 auto;
+    }
+
+    /* Architectural Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .brand-meta-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-meta-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(203, 178, 129, 0.2);
+    }
+
+    .brand-meta-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .brand-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-subtitle {
+      font-size: 13.5px;
+      color: var(--text-body);
+      max-width: 68ch;
+      line-height: 1.5;
+    }
+
+    .header-quick-stats {
+      display: flex;
+      gap: 16px;
+    }
+
+    .stat-pill {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 14px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .stat-pill-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    .stat-pill-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* Refined Filter Deck */
+    .cockpit-bar {
+      background: var(--surface-1);
+      border: 1px solid var(--border-medium);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: grid;
+      grid-template-columns: 1.5fr repeat(6, 1fr) auto;
+      gap: 12px;
+      align-items: flex-end;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    @media (max-width: 1400px) {
+      .cockpit-bar { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 1024px) {
+      .cockpit-bar { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .cockpit-bar { grid-template-columns: 1fr; }
+    }
+
+    .ctrl-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ctrl-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .ctrl-input, .ctrl-select {
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 7px;
+      outline: none;
+      transition: all 0.15s ease;
+      height: 38px;
+    }
+
+    .ctrl-input:focus, .ctrl-select:focus {
+      border-color: var(--accent);
+      background: var(--surface-3);
+    }
+
+    .btn-reset {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-body);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 0 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.15s;
+      height: 38px;
+      white-space: nowrap;
+    }
+    .btn-reset:hover {
+      color: #fff;
+      border-color: var(--border-medium);
+      background: var(--surface-2);
+    }
+
+    /* Workspace Grid */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr 450px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 1040px) {
+      .workspace-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Listings Column */
+    .listings-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 10px;
+    }
+
+    .listings-header strong {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 16px;
+    }
+
+    /* Architectural Property Card */
+    .prop-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .prop-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-medium);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .prop-card.active-selected {
+      border-color: var(--accent);
+      background: var(--surface-2);
+      box-shadow: 0 0 0 1px var(--accent), 0 12px 32px -8px rgba(0, 0, 0, 0.8);
+    }
+
+    .prop-card.is-c4 {
+      border-left: 3px solid var(--accent);
+    }
+
+    /* Trạng thái xác minh cộng đồng (Đã thuê / Đặt cọc) */
+    .prop-card.is-rented {
+      opacity: 0.55;
+      filter: grayscale(0.65);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+    .prop-card.is-rented:hover {
+      opacity: 0.85;
+      filter: grayscale(0.2);
+    }
+    .prop-card.is-reserved {
+      border-color: rgba(245, 158, 11, 0.35);
+    }
+
+    .badge-status-rented {
+      background: rgba(239, 68, 68, 0.85);
+      color: #fff;
+      font-weight: 700;
+    }
+    .badge-status-reserved {
+      background: rgba(245, 158, 11, 0.85);
+      color: #090a0d;
+      font-weight: 700;
+    }
+
+    /* Card Thumbnail */
+    .prop-thumb {
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      background-color: var(--surface-2);
+    }
+
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(16, 18, 23, 0.95) 0%, rgba(16, 18, 23, 0.25) 60%, transparent 100%);
+    }
+
+    .thumb-badges {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      backdrop-filter: blur(12px);
+    }
+
+    .badge-c4-tag {
+      background: rgba(203, 178, 129, 0.92);
+      color: #0d0f14;
+      font-weight: 700;
+    }
+
+    .badge-room-tag {
+      background: rgba(16, 18, 23, 0.8);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .badge-dist-tag {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(16, 18, 23, 0.85);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    /* Card Content */
+    .prop-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .prop-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.35;
+    }
+
+    .prop-address {
+      font-size: 12.5px;
+      color: var(--text-body);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .prop-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+      margin-top: auto;
+    }
+
+    .prop-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--price-tag);
+    }
+
+    .prop-price.negotiable {
+      color: var(--warning);
+      font-size: 13.5px;
+    }
+
+    .prop-area {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Card Actions */
+    .prop-foot {
+      padding: 10px 16px;
+      background: rgba(13, 15, 20, 0.6);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-action-phone {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--surface-2);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 5px 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .btn-action-phone:hover {
+      background: var(--accent);
+      color: #0a0c10;
+      border-color: var(--accent);
+    }
+
+    .btn-action-view {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.15s;
+    }
+    .btn-action-view:hover { color: #fff; }
+
+    /* Right Column: Architectural Evidence Inspector */
+    .inspector-panel {
+      background: var(--surface-1);
+      border: 1px solid var(--border-medium);
+      border-radius: 12px;
+      padding: 22px;
+      position: sticky;
+      top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .inspector-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .inspector-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .inspector-badge {
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      background: var(--surface-2);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .insp-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+    }
+
+    .insp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: var(--surface-2);
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      font-size: 12.5px;
+    }
+
+    .insp-grid-item { display: flex; flex-direction: column; gap: 3px; }
+    .insp-k { color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; }
+    .insp-v { color: #fff; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+
+    /* Raw Quote Section */
+    .insp-raw-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .insp-raw-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .insp-raw-text {
+      font-size: 13px;
+      color: #e2e8f0;
+      line-height: 1.55;
+      font-style: italic;
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 6px;
+      border-left: 2px solid var(--accent);
+    }
+
+    /* Verification Checklist */
+    .checklist-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 12.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chk-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-body);
+    }
+    .chk-ok { color: var(--verified); font-weight: 700; }
+
+    /* Community Status Update Block */
+    .community-verify-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .community-verify-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .community-verify-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .community-status-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .status-available {
+      background: rgba(129, 178, 154, 0.15);
+      color: var(--verified);
+      border: 1px solid rgba(129, 178, 154, 0.3);
+    }
+    .status-reserved {
+      background: rgba(233, 196, 106, 0.15);
+      color: var(--warning);
+      border: 1px solid rgba(233, 196, 106, 0.3);
+    }
+    .status-rented {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .community-btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+    }
+
+    .btn-community-action {
+      background: var(--surface-3);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-body);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 7px 4px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+
+    .btn-community-action:hover {
+      background: var(--surface-hover);
+      color: #fff;
+      border-color: var(--border-medium);
+    }
+
+    .btn-community-action.is-current {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .community-note-input {
+      background: var(--bg);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      outline: none;
+      width: 100%;
+    }
+    .community-note-input:focus {
+      border-color: var(--accent);
+    }
+
+    .community-note-display {
+      font-size: 12px;
+      color: #cbd5e1;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 6px;
+      padding: 8px 10px;
+      border-left: 2px solid var(--accent);
+      line-height: 1.45;
+    }
+
+    /* Actions in Inspector */
+    .insp-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .btn-main-call {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #090a0d;
+      font-weight: 700;
+      font-size: 13.5px;
+      padding: 11px;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: all 0.15s;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .btn-main-call:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-main-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-body);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 10px;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-main-link:hover {
+      border-color: var(--border-medium);
+      color: #fff;
+    }
+
+    /* Mobile Responsive (< 768px) */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px 14px 80px 14px;
+      }
+      header {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+      }
+      .brand-title {
+        font-size: 20px;
+      }
+      .brand-subtitle {
+        font-size: 12.5px;
+      }
+      .header-quick-stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .stat-pill {
+        flex: 1;
+      }
+      .cockpit-bar {
+        padding: 14px;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+      .cards-container {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .prop-thumb {
+        height: 145px;
+      }
+
+      /* Bottom Drawer Modal trên điện thoại */
+      .inspector-panel {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        max-height: 85vh;
+        overflow-y: auto;
+        border-radius: 18px 18px 0 0;
+        border-top: 1px solid var(--accent);
+        box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        transform: translateY(105%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 20px 16px 28px 16px;
+      }
+      .inspector-panel.mobile-open {
+        transform: translateY(0%);
+      }
+      .mobile-close-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .mobile-drag-handle {
+        width: 36px;
+        height: 4px;
+        background: #334155;
+        border-radius: 999px;
+        margin: 0 auto;
+      }
+      .btn-close-modal {
+        background: var(--surface-2);
+        border: 1px solid var(--border-subtle);
+        color: var(--text-body);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .modal-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(6px);
+        z-index: 999;
+      }
+      .modal-backdrop.show {
+        display: block;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-close-bar { display: none; }
+      .modal-backdrop { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout-wrapper">
+    
+    <!-- Architectural Header -->
+    <header>
+      <div class="brand-block">
+        <div class="brand-meta-strip">
+          <span class="brand-meta-tag">Live Ingestion</span>
+          <span class="brand-meta-date">Đà Nẵng · Khảo sát 12/10/2026</span>
+        </div>
+        <h1 class="brand-title">Đà Nẵng Rental Index</h1>
+        <p class="brand-subtitle">
+          Cơ sở dữ liệu khảo sát trực tiếp từ Facebook Groups & Chợ Tốt. Minh bạch trích dẫn nguyên văn, kiểm định số điện thoại chính chủ và loại bỏ suy đoán.
+        </p>
+      </div>
+
+      <div class="header-quick-stats">
+        <div class="stat-pill">
+          <span class="stat-pill-label">Đang hiển thị</span>
+          <span class="stat-pill-val" id="topActiveCount">17 căn</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill-label">Cập nhật</span>
+          <span class="stat-pill-val">&le; 7 ngày</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Cockpit Filter Bar Nâng Cao -->
+    <div class="cockpit-bar">
+      <div class="ctrl-group">
+        <label class="ctrl-label">Tìm kiếm từ khóa / Tuyến đường / SĐT</label>
+        <input type="text" id="filterKeyword" class="ctrl-input" placeholder="Ví dụ: Ngô Gia Tự, Hoàng Diệu, 0935, điều hòa..." oninput="runFilters()">
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Khu vực / Quận Huyện</label>
+        <select id="filterDistrict" class="ctrl-select" onchange="runFilters()">
+          <option value="all">Toàn bộ Đà Nẵng (Tất cả quận)</option>
+          <option value="Hải Châu">Quận Hải Châu</option>
+          <option value="Cẩm Lệ">Quận Cẩm Lệ</option>
+          <option value="Thanh Khê">Quận Thanh Khê</option>
+          <option value="Liên Chiểu">Quận Liên Chiểu</option>
+          <option value="Sơn Trà">Quận Sơn Trà</option>
+          <option value="Ngũ Hành Sơn">Quận Ngũ Hành Sơn</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Loại hình lưu trú</label>
+        <select id="filterType" class="ctrl-select" onchange="runFilters()">
+          <option value="all">Tất cả loại hình</option>
+          <option value="c4">⭐ Nhà C4 Nguyên Căn</option>
+          <option value="phong">Phòng riêng khép kín</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Mức giá thuê</label>
+        <select id="filterPrice" class="ctrl-select" onchange="runFilters()">
+          <option value="all">Tất cả mức giá</option>
+          <option value="under2m">Dưới 2.0 triệu/tháng</option>
+          <option value="2m-3m">Từ 2.0 - 3.0 triệu/tháng</option>
+          <option value="above3m">Từ 3.0 - 5.0 triệu/tháng</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Diện tích phòng</label>
+        <select id="filterArea" class="ctrl-select" onchange="runFilters()">
+          <option value="all">Mọi diện tích</option>
+          <option value="under20">Dưới 20 m²</option>
+          <option value="20-50">Từ 20 - 50 m²</option>
+          <option value="above50">Rộng rãi (> 50 m²)</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Tiện ích / Thú cưng</label>
+        <select id="filterFeature" class="ctrl-select" onchange="runFilters()">
+          <option value="all">Tất cả tiện ích</option>
+          <option value="pet">Cho nuôi thú cưng / Mèo</option>
+          <option value="ac">Có điều hòa / Nóng lạnh</option>
+          <option value="mezzanine">Có gác lửng / Đúc</option>
+          <option value="private">Không chung chủ / Giờ tự do</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">Trạng thái phòng</label>
+        <select id="filterStatus" class="ctrl-select" onchange="runFilters()">
+          <option value="all">Tất cả trạng thái</option>
+          <option value="available" selected>✓ Đang còn phòng</option>
+          <option value="reserved">⏳ Đã đặt cọc</option>
+          <option value="rented">✕ Đã cho thuê</option>
+        </select>
+      </div>
+      <div>
+        <button class="btn-reset" onclick="resetAllFilters()">Đặt lại</button>
+      </div>
+    </div>
+
+    <!-- Workspace: Split View (List + Inspector) -->
+    <div class="workspace-grid">
+      
+      <!-- Cột Trái: Danh Sách Card Bất Động Sản -->
+      <div>
+        <div class="listings-header">
+          <span>Tìm thấy <strong id="activeCount">17</strong> căn hợp lệ</span>
+          <span>Bấm vào thẻ bất kỳ để soi chi tiết bằng chứng bên phải</span>
+        </div>
+
+        <div class="cards-container" id="cardsGrid">
+
+          <!-- Card DN-15 (FB Group Hải Châu 4.0M) -->
+          <div class="prop-card active-selected" id="card-DN-15" onclick="selectProperty('DN-15')"
+               data-type="phong" data-district="Hải Châu" data-area="25" data-price="4.0" data-status="available"
+               data-pet="yes" data-ac="yes" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ k634/h71 trưng nữ vương hải châu thanh huyền 0984291095 4000000 4tr full nội thất máy giặt wc riêng">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-15">
+                <span class="badge badge-room-tag">FB Group · Full nội thất</span>
+                <span class="badge badge-room-tag">Trống tháng 10</span>
+              </div>
+              <div class="badge-dist-tag">Q. Hải Châu</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ mới xây full nội thất K634/H71 Trưng Nữ Vương</div>
+              <div class="prop-address">📍 K634/H71 Trưng Nữ Vương, P. Hòa Thuận Tây, Hải Châu</div>
+              <div class="prop-price-row">
+                <div class="prop-price">4.000.000 đ</div>
+                <div class="prop-area">DT: 25 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0984291095" class="btn-action-phone" onclick="event.stopPropagation()">📞 0984.291.095</a>
+              <a href="https://www.facebook.com/groups/timphongtrodanang/" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở FB Group ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-16 (FB Group Hải Châu Đường 3/2 4.0M) -->
+          <div class="prop-card" id="card-DN-16" onclick="selectProperty('DN-16')"
+               data-type="phong" data-district="Hải Châu" data-area="22" data-price="4.0" data-status="available"
+               data-pet="yes" data-ac="yes" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ đường 3/2 thuận phước hải châu lâm tuấn khang 0912651312 4000000 4tr cửa sổ tủ lạnh điều hòa">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-16">
+                <span class="badge badge-room-tag">FB Group · Có gác & cửa sổ</span>
+              </div>
+              <div class="badge-dist-tag">Q. Hải Châu</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ 1 gác có cửa sổ thoáng mát đường 3/2</div>
+              <div class="prop-address">📍 Đường 3/2, P. Thuận Phước, Hải Châu</div>
+              <div class="prop-price-row">
+                <div class="prop-price">4.000.000 đ</div>
+                <div class="prop-area">DT: 22 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0912651312" class="btn-action-phone" onclick="event.stopPropagation()">📞 0912.651.312</a>
+              <a href="https://www.facebook.com/groups/canhophongtrodanang/" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở FB Group ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-02 -->
+          <div class="prop-card" id="card-DN-02" onclick="selectProperty('DN-02')"
+               data-type="phong" data-district="Hải Châu" data-area="15" data-price="2.0" data-status="available"
+               data-pet="yes" data-ac="yes" data-mezzanine="no" data-private="yes"
+               data-search="phòng trọ hoàng diệu bình thuận hải châu lê vân 0905442380 2000000 2tr điều hòa tự do">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-02">
+                <span class="badge badge-room-tag">Phòng khép kín</span>
+                <span class="badge badge-room-tag">Vừa đăng 1h</span>
+              </div>
+              <div class="badge-dist-tag">Q. Hải Châu</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ TTTP đường Hoàng Diệu sạch sẽ thoáng mát</div>
+              <div class="prop-address">📍 368/63 Hoàng Diệu, P. Bình Thuận, Hải Châu</div>
+              <div class="prop-price-row">
+                <div class="prop-price">2.000.000 đ</div>
+                <div class="prop-area">DT: 15 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0905442380" class="btn-action-phone" onclick="event.stopPropagation()">📞 0905.442.380</a>
+              <a href="https://www.nhatot.com/thue-phong-tro-quan-hai-chau-da-nang/135184466.htm" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Chợ Tốt ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-03 -->
+          <div class="prop-card" id="card-DN-03" onclick="selectProperty('DN-03')"
+               data-type="phong" data-district="Hải Châu" data-area="20" data-price="2.3" data-status="available"
+               data-pet="yes" data-ac="yes" data-mezzanine="no" data-private="yes"
+               data-search="phòng trọ tiểu la hòa cường bắc hải châu an lê 0359785499 2300000 2.3tr điều hòa máy giặt">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-03">
+                <span class="badge badge-room-tag">Điều hòa · Máy giặt</span>
+              </div>
+              <div class="badge-dist-tag" style="color: #34d399; border-color: rgba(16,185,129,0.3);">Q. Hải Châu</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ đường Tiểu La có Điều hòa & Máy giặt</div>
+              <div class="prop-address">📍 29 Tiểu La, P. Hòa Cường Bắc, Hải Châu</div>
+              <div class="prop-price-row">
+                <div class="prop-price">2.300.000 đ</div>
+                <div class="prop-area">DT: 20 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0359785499" class="btn-action-phone" onclick="event.stopPropagation()">📞 0359.785.499</a>
+              <a href="https://www.nhatot.com/thue-phong-tro-quan-hai-chau-da-nang/135136690.htm" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Chợ Tốt ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-04 -->
+          <div class="prop-card" id="card-DN-04" onclick="selectProperty('DN-04')"
+               data-type="phong" data-district="Cẩm Lệ" data-area="25" data-price="1.8" data-status="available"
+               data-pet="yes" data-ac="no" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ mặt tiền lương khắc ninh hòa xuân cẩm lệ anh hùng 0902554244 1800000 1.8tr gác lửng">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-04">
+                <span class="badge badge-room-tag">Mặt tiền có gác</span>
+              </div>
+              <div class="badge-dist-tag">Q. Cẩm Lệ</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ mặt tiền giá rẻ Hòa Xuân có gác lửng</div>
+              <div class="prop-address">📍 47 Lương Khắc Ninh, P. Hòa Xuân, Cẩm Lệ</div>
+              <div class="prop-price-row">
+                <div class="prop-price">1.800.000 đ</div>
+                <div class="prop-area">DT: 25 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0902554244" class="btn-action-phone" onclick="event.stopPropagation()">📞 0902.554.244</a>
+              <a href="https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135167366.htm" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Chợ Tốt ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-05 -->
+          <div class="prop-card" id="card-DN-05" onclick="selectProperty('DN-05')"
+               data-type="phong" data-district="Thanh Khê" data-area="20" data-price="2.2" data-status="available"
+               data-pet="yes" data-ac="no" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ thanh tân thanh khê đông đúc lửng bếp riêng đn 0935184357 2200000 2.2tr">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-05">
+                <span class="badge badge-room-tag">Đúc lửng bếp riêng</span>
+              </div>
+              <div class="badge-dist-tag">Q. Thanh Khê</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ thoáng mát tiện nghi Thanh Khê</div>
+              <div class="prop-address">📍 Đường Thanh Tân, P. Thanh Khê Đông, Thanh Khê</div>
+              <div class="prop-price-row">
+                <div class="prop-price">2.200.000 đ</div>
+                <div class="prop-area">DT: 20 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0935184357" class="btn-action-phone" onclick="event.stopPropagation()">📞 0935.184.357</a>
+              <a href="https://www.nhatot.com/thue-phong-tro-quan-thanh-khe-da-nang/134520153.htm" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Chợ Tốt ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-06 -->
+          <div class="prop-card" id="card-DN-06" onclick="selectProperty('DN-06')"
+               data-type="phong" data-district="Cẩm Lệ" data-area="20" data-price="2.0" data-status="available"
+               data-pet="yes" data-ac="no" data-mezzanine="no" data-private="yes"
+               data-search="phòng trọ trường chinh cẩm lệ hòa thọ tây huynhdiem 0902187963 2000000 2tr không ngập">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-06">
+                <span class="badge badge-room-tag">Khu cao không ngập</span>
+              </div>
+              <div class="badge-dist-tag">Q. Cẩm Lệ</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ Trường Chinh Cẩm Lệ (vào ở 12-15/10)</div>
+              <div class="prop-address">📍 1234 Trường Chinh, P. Hòa Thọ Tây, Cẩm Lệ</div>
+              <div class="prop-price-row">
+                <div class="prop-price">2.000.000 đ</div>
+                <div class="prop-area">DT: 20 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0902187963" class="btn-action-phone" onclick="event.stopPropagation()">📞 0902.187.963</a>
+              <a href="https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135029772.htm" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Chợ Tốt ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-07 -->
+          <div class="prop-card is-c4" id="card-DN-07" onclick="selectProperty('DN-07')"
+               data-type="c4" data-district="Liên Chiểu" data-area="130" data-price="2.0" data-status="available"
+               data-pet="yes" data-ac="no" data-mezzanine="no" data-private="yes"
+               data-search="nhà cấp 4 nguyên căn 130m2 sân vườn nguyễn lương bằng thúy nga 0905947460 2000000 2tr liên chiểu nuôi mèo">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-07">
+                <span class="badge badge-c4-tag">⭐ Nhà C4 Sân Vườn 130m²</span>
+              </div>
+              <div class="badge-dist-tag">Q. Liên Chiểu</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Nhà cấp 4 nguyên căn 130m² có sân vườn kiệt ô tô</div>
+              <div class="prop-address">📍 Kiệt ô tô Nguyễn Lương Bằng, Hòa Khánh Bắc</div>
+              <div class="prop-price-row">
+                <div class="prop-price">2.000.000 đ</div>
+                <div class="prop-area">DT: 130 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0905947460" class="btn-action-phone" onclick="event.stopPropagation()">📞 0905.947.460</a>
+              <a href="https://www.nhatot.com/thue-nha-dat-quan-lien-chieu-da-nang/135005246.htm" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Chợ Tốt ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-08 -->
+          <div class="prop-card" id="card-DN-08" onclick="selectProperty('DN-08')"
+               data-type="phong" data-district="Cẩm Lệ" data-area="12" data-price="1.7" data-status="available"
+               data-pet="yes" data-ac="yes" data-mezzanine="no" data-private="yes"
+               data-search="phòng trọ thanh lương 11 hòa xuân hoa mai 0905033357 1700000 1.7tr điều hòa nóng lạnh">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1540518614846-7ede433c4550?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-08">
+                <span class="badge badge-room-tag">Giá rẻ có điều hòa</span>
+              </div>
+              <div class="badge-dist-tag">Q. Cẩm Lệ</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ giá rẻ 80-82 Thanh Lương 11, Hòa Xuân</div>
+              <div class="prop-address">📍 80-82 Thanh Lương 11, P. Hòa Xuân, Cẩm Lệ</div>
+              <div class="prop-price-row">
+                <div class="prop-price">1.700.000 đ</div>
+                <div class="prop-area">DT: 12 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0905033357" class="btn-action-phone" onclick="event.stopPropagation()">📞 0905.033.357</a>
+              <a href="https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135144525.htm" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Chợ Tốt ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-09 -->
+          <div class="prop-card" id="card-DN-09" onclick="selectProperty('DN-09')"
+               data-type="phong" data-district="Cẩm Lệ" data-area="20" data-price="2.0" data-status="available"
+               data-pet="yes" data-ac="yes" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ 78 nguyễn xuân hữu hòa thọ đông cẩm lệ trần thị thúy 0975426910 2000000 2tr gác lửng nóng lạnh">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-09">
+                <span class="badge badge-room-tag">Gác lửng · Nóng lạnh</span>
+                <span class="badge badge-room-tag">Cập nhật 09/10</span>
+              </div>
+              <div class="badge-dist-tag">Q. Cẩm Lệ</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ có gác lửng bình nóng lạnh 78 Nguyễn Xuân Hữu</div>
+              <div class="prop-address">📍 78 Nguyễn Xuân Hữu, P. Hòa Thọ Đông, Cẩm Lệ</div>
+              <div class="prop-price-row">
+                <div class="prop-price">2.000.000 đ</div>
+                <div class="prop-area">DT: 20 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0975426910" class="btn-action-phone" onclick="event.stopPropagation()">📞 0975.426.910</a>
+              <a href="https://phongtro123.com/tinh-thanh/da-nang/quan-cam-le" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Phongtro123 ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-10 -->
+          <div class="prop-card" id="card-DN-10" onclick="selectProperty('DN-10')"
+               data-type="phong" data-district="Cẩm Lệ" data-area="15" data-price="1.9" data-status="available"
+               data-pet="yes" data-ac="no" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ trần huấn khuê trung cẩm lệ nnqchi 0983243484 1900000 1.9tr gác lửng toilet riêng mega market">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-10">
+                <span class="badge badge-room-tag">Gác lửng · WC riêng</span>
+                <span class="badge badge-room-tag">Cập nhật 10/10</span>
+              </div>
+              <div class="badge-dist-tag">Q. Cẩm Lệ</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ 15m² có gác lửng toilet riêng đường Trần Huấn</div>
+              <div class="prop-address">📍 Đường Trần Huấn, P. Khuê Trung, Cẩm Lệ</div>
+              <div class="prop-price-row">
+                <div class="prop-price">1.900.000 đ</div>
+                <div class="prop-area">DT: 15 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0983243484" class="btn-action-phone" onclick="event.stopPropagation()">📞 0983.243.484</a>
+              <a href="https://phongtro123.com/tinh-thanh/da-nang/quan-cam-le" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Phongtro123 ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-11 -->
+          <div class="prop-card" id="card-DN-11" onclick="selectProperty('DN-11')"
+               data-type="phong" data-district="Ngũ Hành Sơn" data-area="20" data-price="2.0" data-status="available"
+               data-pet="yes" data-ac="no" data-mezzanine="no" data-private="yes"
+               data-search="phòng trọ giá rẻ chợ non nước k35/3 nam thành ngũ hành sơn kiều oanh 0859454850 2000000 2tr fpt">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-11">
+                <span class="badge badge-room-tag">Ngay chợ Non Nước</span>
+                <span class="badge badge-room-tag">Cập nhật 04/10</span>
+              </div>
+              <div class="badge-dist-tag">Q. Ngũ Hành Sơn</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ giá rẻ khu vực ngay chợ Non Nước</div>
+              <div class="prop-address">📍 K35/3 Nam Thành, P. Hòa Hải, Ngũ Hành Sơn</div>
+              <div class="prop-price-row">
+                <div class="prop-price">2.000.000 đ</div>
+                <div class="prop-area">DT: 20 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0859454850" class="btn-action-phone" onclick="event.stopPropagation()">📞 0859.454.850</a>
+              <a href="https://phongtro123.com/tinh-thanh/da-nang/quan-ngu-hanh-son" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Phongtro123 ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-12 -->
+          <div class="prop-card" id="card-DN-12" onclick="selectProperty('DN-12')"
+               data-type="phong" data-district="Liên Chiểu" data-area="18" data-price="1.4" data-status="available"
+               data-pet="yes" data-ac="no" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ 34/18 âu cơ hòa khánh bắc liên chiểu cô phước 0935881723 1400000 1.4tr gác lửng giá rẻ">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-12">
+                <span class="badge badge-room-tag">Giá cực rẻ 1.4M</span>
+                <span class="badge badge-room-tag">Gác lửng sạch sẽ</span>
+              </div>
+              <div class="badge-dist-tag">Q. Liên Chiểu</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ mới sạch sẽ thoáng mát có gác lửng 34/18 Âu Cơ</div>
+              <div class="prop-address">📍 34/18 Âu Cơ, P. Hòa Khánh Bắc, Liên Chiểu</div>
+              <div class="prop-price-row">
+                <div class="prop-price">1.400.000 đ</div>
+                <div class="prop-area">DT: 18 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0935881723" class="btn-action-phone" onclick="event.stopPropagation()">📞 0935.881.723</a>
+              <a href="https://www.facebook.com/groups/timphongtrodanang/" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở FB Group ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-13 -->
+          <div class="prop-card" id="card-DN-13" onclick="selectProperty('DN-13')"
+               data-type="phong" data-district="Liên Chiểu" data-area="28" data-price="3.8" data-status="available"
+               data-pet="yes" data-ac="yes" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ căn hộ mới xây 26 hòa nam 9 hòa minh liên chiểu chính chủ 0977200888 3800000 3.8tr full nội thất máy giặt">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1502005229762-ae1b466428f2?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-13">
+                <span class="badge badge-room-tag">Full nội thất · Máy giặt riêng</span>
+              </div>
+              <div class="badge-dist-tag">Q. Liên Chiểu</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ căn hộ mới xây có gác full nội thất 26 Hòa Nam 9</div>
+              <div class="prop-address">📍 26 Hòa Nam 9, P. Hòa Minh, Liên Chiểu</div>
+              <div class="prop-price-row">
+                <div class="prop-price">3.800.000 đ</div>
+                <div class="prop-area">DT: 28 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0977200888" class="btn-action-phone" onclick="event.stopPropagation()">📞 0977.200.888</a>
+              <a href="https://www.facebook.com/groups/canhophongtrodanang/" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở FB Group ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-14 -->
+          <div class="prop-card" id="card-DN-14" onclick="selectProperty('DN-14')"
+               data-type="phong" data-district="Sơn Trà" data-area="20" data-price="4.0" data-status="available"
+               data-pet="no" data-ac="yes" data-mezzanine="no" data-private="no"
+               data-search="phòng mặt tiền tầng 2 51 an trung đông 7 an hải bắc sơn trà 0768575666 4000000 4tr võ văn kiệt máy lạnh ban công">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-14">
+                <span class="badge badge-room-tag">Mặt tiền · Ban công thoáng</span>
+              </div>
+              <div class="badge-dist-tag">Q. Sơn Trà</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng mặt tiền tầng 2 sạch sẽ có ban công 51 An Trung Đông 7</div>
+              <div class="prop-address">📍 51 An Trung Đông 7, P. An Hải Bắc, Sơn Trà</div>
+              <div class="prop-price-row">
+                <div class="prop-price">4.000.000 đ</div>
+                <div class="prop-area">DT: 20 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0768575666" class="btn-action-phone" onclick="event.stopPropagation()">📞 0768.575.666</a>
+              <a href="https://phongtro123.com/tinh-thanh/da-nang/quan-son-tra" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Phongtro123 ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-17 (Phongtro123 Ngũ Hành Sơn 4.0M) -->
+          <div class="prop-card" id="card-DN-17" onclick="selectProperty('DN-17')"
+               data-type="phong" data-district="Ngũ Hành Sơn" data-area="17" data-price="4.0" data-status="available"
+               data-pet="yes" data-ac="yes" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ 61 võ chí công ngũ hành sơn thanh minh 0987876556 4000000 4tr ban công thang máy gác lửng">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-17">
+                <span class="badge badge-room-tag">Ban công · Thang máy</span>
+                <span class="badge badge-room-tag">Phongtro123 #713729</span>
+              </div>
+              <div class="badge-dist-tag">Q. Ngũ Hành Sơn</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ ban công thoáng mát 61 Võ Chí Công</div>
+              <div class="prop-address">📍 61 Võ Chí Công, P. Hòa Quý, Ngũ Hành Sơn</div>
+              <div class="prop-price-row">
+                <div class="prop-price">4.000.000 đ</div>
+                <div class="prop-area">DT: 17 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0987876556" class="btn-action-phone" onclick="event.stopPropagation()">📞 0987.876.556</a>
+              <a href="https://phongtro123.com/cho-thue-phong-tro-ban-cong-thoang-mat-713729.html" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở Phongtro123 ↗</a>
+            </div>
+          </div>
+
+          <!-- Card DN-18 (FB Group Liên Chiểu Đặng Chất 3.8M) -->
+          <div class="prop-card" id="card-DN-18" onclick="selectProperty('DN-18')"
+               data-type="phong" data-district="Liên Chiểu" data-area="25" data-price="3.8" data-status="available"
+               data-pet="yes" data-ac="yes" data-mezzanine="yes" data-private="yes"
+               data-search="phòng trọ 30 đặng chất hòa khánh bắc liên chiểu a hảo 0349560111 3800000 3.8tr full nội thất khóa từ máy lọc nước">
+            <div class="prop-thumb" style="background-image: url('https://images.unsplash.com/photo-1540518614846-7ede433c4550?w=600&auto=format&fit=crop&q=80');">
+              <div class="thumb-overlay"></div>
+              <div class="thumb-badges" id="badges-DN-18">
+                <span class="badge badge-room-tag">FB Group · Khóa từ</span>
+                <span class="badge badge-room-tag">Full tiện nghi</span>
+              </div>
+              <div class="badge-dist-tag">Q. Liên Chiểu</div>
+            </div>
+            <div class="prop-body">
+              <div class="prop-title">Phòng trọ có gác full nội thất khóa từ 30 Đặng Chất</div>
+              <div class="prop-address">📍 30 Đặng Chất, P. Hòa Khánh Bắc, Liên Chiểu</div>
+              <div class="prop-price-row">
+                <div class="prop-price">3.800.000 đ</div>
+                <div class="prop-area">DT: 25 m²</div>
+              </div>
+            </div>
+            <div class="prop-foot">
+              <a href="tel:0349560111" class="btn-action-phone" onclick="event.stopPropagation()">📞 0349.560.111</a>
+              <a href="https://www.facebook.com/groups/timphongtrodanang/" target="_blank" class="btn-action-view" onclick="event.stopPropagation()">Mở FB Group ↗</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Backdrop làm mờ khi mở modal trên điện thoại -->
+      <div class="modal-backdrop" id="modalBackdrop" onclick="closeMobileInspector()"></div>
+
+      <!-- Cột Phải: Inspector Panel Soi Chi Tiết Bằng Chứng -->
+      <aside class="inspector-panel" id="inspectorPanel">
+        <!-- Handle kéo và nút đóng trên Mobile -->
+        <div class="mobile-close-bar">
+          <div class="mobile-drag-handle"></div>
+          <button class="btn-close-modal" onclick="closeMobileInspector()">✕ Đóng</button>
+        </div>
+
+        <div class="inspector-head">
+          <span class="inspector-label">INSPECTOR BẰNG CHỨNG XÁC THỰC</span>
+          <span class="inspector-badge" id="inspCode">DN-15</span>
+        </div>
+
+        <div>
+          <h2 class="insp-title" id="inspTitle">Phòng trọ mới xây full nội thất K634/H71 Trưng Nữ Vương</h2>
+          <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;" id="inspAddr">📍 K634/H71 Trưng Nữ Vương, P. Hòa Thuận Tây, Hải Châu</div>
+        </div>
+
+        <div class="insp-grid">
+          <div class="insp-grid-item">
+            <span class="insp-k">Giá niêm yết</span>
+            <span class="insp-v" id="inspPrice" style="color: #38bdf8;">4.000.000 đ</span>
+          </div>
+          <div class="insp-grid-item">
+            <span class="insp-k">Diện tích</span>
+            <span class="insp-v" id="inspArea">25 m²</span>
+          </div>
+          <div class="insp-grid-item">
+            <span class="insp-k">Khu vực / Quận</span>
+            <span class="insp-v" id="inspDist">Hải Châu</span>
+          </div>
+          <div class="insp-grid-item">
+            <span class="insp-k">Chung chủ?</span>
+            <span class="insp-v" id="inspHost">Không chung chủ</span>
+          </div>
+        </div>
+
+        <div class="insp-raw-box">
+          <div class="insp-raw-label">Trích dẫn bài đăng gốc (Nguyên bản DOM)</div>
+          <div class="insp-raw-text" id="inspRawText">
+            "Phòng trọ mới xây K634/H71 Trưng Nữ Vương, full nội thất (điều hòa, máy giặt, tủ bếp, nóng lạnh, WC riêng), không chung chủ, giờ giấc tự do, trống đầu tháng 10. Giá 4 triệu/tháng."
+          </div>
+          <div style="margin-top: 8px; font-size: 11.5px; color: var(--text-dim);" id="inspSourceMeta">
+            Nguồn: Facebook Group 'Tìm Phòng Trọ Đà Nẵng' · Người đăng: Chị Thanh Huyền · SĐT: 0984.291.095
+          </div>
+        </div>
+
+        <div class="checklist-box">
+          <div class="chk-item"><span class="chk-ok">✓</span> Hạn bài đăng: <span id="inspDate">11/10/2026 (16h trước, &le; 7 ngày)</span></div>
+          <div class="chk-item"><span class="chk-ok">✓</span> Thú cưng / Pet: <strong style="color: #fff;" id="inspPet">Thoải mái (Nhà riêng độc lập)</strong></div>
+          <div class="chk-item"><span class="chk-ok">✓</span> Tình trạng: <span>Đang mở, chưa có thẻ hết hạn</span></div>
+        </div>
+
+        <!-- Hộp Kiểm Chứng & Đánh Dấu Trạng Thái Cộng Đồng -->
+        <div class="community-verify-box">
+          <div class="community-verify-head">
+            <span class="community-verify-title">Kiểm chứng từ người gọi</span>
+            <span class="community-status-badge status-available" id="inspStatusBadge">Đang còn phòng</span>
+          </div>
+
+          <div class="community-btn-group">
+            <button class="btn-community-action is-current" id="btnStatusAvailable" onclick="updatePropertyStatus('available')">
+              ✓ Còn phòng
+            </button>
+            <button class="btn-community-action" id="btnStatusReserved" onclick="updatePropertyStatus('reserved')">
+              ⏳ Đã cọc
+            </button>
+            <button class="btn-community-action" id="btnStatusRented" onclick="updatePropertyStatus('rented')">
+              ✕ Đã thuê
+            </button>
+          </div>
+
+          <!-- Lời nhắn / Ghi chú kiểm chứng từ người gọi gần nhất -->
+          <div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 5px;">Ghi chú sau khi gọi điện:</div>
+            <div class="community-note-display" id="inspCommunityNote">
+              "Chưa có ai phản hồi báo hết phòng. Bạn có thể gọi kiểm tra trực tiếp."
+            </div>
+            <div style="display: flex; gap: 6px; margin-top: 8px;">
+              <input type="text" id="inputCommunityNote" class="community-note-input" placeholder="Vừa gọi: đã bớt giá / chủ hẹn xem...">
+              <button class="btn-community-action" style="white-space: nowrap; padding: 0 10px;" onclick="submitCommunityNote()">Lưu</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="insp-actions">
+          <a href="tel:0984291095" class="btn-main-call" id="inspCallBtn">📞 Gọi Ngay: <span id="inspPhone">0984.291.095</span></a>
+          <a href="https://www.facebook.com/groups/timphongtrodanang/" target="_blank" class="btn-main-link" id="inspLinkBtn">Mở Bài Đăng Gốc Xác Thực ↗</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script>
+    // Dữ liệu chi tiết của 8 căn để đồng bộ khi click
+    const rentalData = {
+      "DN-15": {
+        code: "DN-15",
+        title: "Phòng trọ mới xây full nội thất K634/H71 Trưng Nữ Vương",
+        addr: "📍 K634/H71 Trưng Nữ Vương, P. Hòa Thuận Tây, Hải Châu",
+        price: "4.000.000 đ",
+        priceColor: "#f59e0b",
+        area: "25 m²",
+        district: "Hải Châu",
+        host: "Không chung chủ",
+        raw: '"Phòng trọ mới xây K634/H71 Trưng Nữ Vương, full nội thất (điều hòa, máy giặt, tủ bếp, nóng lạnh, WC riêng), không chung chủ, giờ giấc tự do, trống đầu tháng 10. Giá 4 triệu/tháng."',
+        source: "Nguồn: Facebook Group Tìm Phòng Trọ Đà Nẵng · Người đăng: Chị Thanh Huyền · Hoạt động 10/2026",
+        date: "09/10/2026 (3 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0984.291.095",
+        link: "https://www.facebook.com/groups/timphongtrodanang/"
+      },
+      "DN-02": {
+        code: "DN-02",
+        title: "Phòng trọ TTTP đường Hoàng Diệu sạch sẽ thoáng mát",
+        addr: "📍 368/63 Hoàng Diệu, P. Bình Thuận, Hải Châu",
+        price: "2.000.000 đ",
+        priceColor: "#38bdf8",
+        area: "15 m²",
+        district: "Hải Châu",
+        host: "Không (WC khép kín)",
+        raw: '"_Khu vực trung tâm thành phố an ninh cao, gần chợ, trường học, siêu thị… _Giờ giấc tự do, wifi miễn phí. SĐT: 0905442380"',
+        source: "Nguồn: Chợ Tốt (Nhà Tốt) · Người đăng: Lê Vân · Hoạt động: 1 giờ trước",
+        date: "12/10/2026 (Cập nhật 1h trước)",
+        pet: "Được phép (riêng biệt)",
+        phone: "0905.442.380",
+        link: "https://www.nhatot.com/thue-phong-tro-quan-hai-chau-da-nang/135184466.htm"
+      },
+      "DN-03": {
+        code: "DN-03",
+        title: "Phòng trọ đường Tiểu La có Điều hòa & Máy giặt",
+        addr: "📍 29 Tiểu La, P. Hòa Cường Bắc, Hải Châu",
+        price: "2.300.000 đ",
+        priceColor: "#38bdf8",
+        area: "20 m²",
+        district: "Hải Châu",
+        host: "Không chung chủ",
+        raw: '"Cho thuê phòng trọ đường Tiểu La có điều hòa, máy nước nóng, máy giặt. Phòng khép kín sạch sẽ, gần ĐH Kiến Trúc, Đông Á."',
+        source: "Nguồn: Chợ Tốt (Nhà Tốt) · Người đăng: An Lê · Cập nhật 3 ngày trước",
+        date: "09/10/2026 (3 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0359.785.499",
+        link: "https://www.nhatot.com/thue-phong-tro-quan-hai-chau-da-nang/135136690.htm"
+      },
+      "DN-04": {
+        code: "DN-04",
+        title: "Phòng trọ mặt tiền giá rẻ Hòa Xuân có gác lửng",
+        addr: "📍 47 Lương Khắc Ninh, P. Hòa Xuân, Cẩm Lệ",
+        price: "1.800.000 đ",
+        priceColor: "#38bdf8",
+        area: "25 m²",
+        district: "Cẩm Lệ",
+        host: "Lối đi riêng (Mặt tiền)",
+        raw: '"CÒN 1 PHÒNG TRỌ MẶT TIỀN TRỐNG CHO THUÊ , KHU VƯC ĐƯỜNG LỚN , KHU VỰC AN NINH TỐT ,CÓ GÁC LỬNG , PHÒNG VỆ SINH TRONG NHÀ , ĐIÊN NƯƠC TÍNH THEO GIÁ NHÀ NƯỚC , WIFI MIỄN PHÍ . MOI CHI TIÊT LIÊN HỆ ; 47 LƯƠNG KHẮC NINH , HÒA XUÂN CẨM LỆ ĐÀ NẴNG"',
+        source: "Nguồn: Chợ Tốt (Nhà Tốt) · Người đăng: HÙNG · Cập nhật 2 ngày trước",
+        date: "10/10/2026 (2 ngày trước, &le; 7 ngày)",
+        pet: "Rất phù hợp (lối đi riêng có gác)",
+        phone: "0902.554.244",
+        link: "https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135167366.htm"
+      },
+      "DN-05": {
+        code: "DN-05",
+        title: "Phòng trọ thoáng mát tiện nghi Thanh Khê",
+        addr: "📍 Đường Thanh Tân, P. Thanh Khê Đông, Thanh Khê",
+        price: "2.200.000 đ",
+        priceColor: "#38bdf8",
+        area: "20 m²",
+        district: "Thanh Khê",
+        host: "Không (Đúc lửng tầng trệt)",
+        raw: '"Phòng trọ cho thuê thoáng mát và tiện nghi Thanh Khê, đúc lửng, bếp riêng, WC riêng sạch sẽ, để xe rộng rãi."',
+        source: "Nguồn: Chợ Tốt (Nhà Tốt) · Người đăng: ĐN · Cập nhật 3 ngày trước",
+        date: "09/10/2026 (3 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0935.184.357",
+        link: "https://www.nhatot.com/thue-phong-tro-quan-thanh-khe-da-nang/134520153.htm"
+      },
+      "DN-06": {
+        code: "DN-06",
+        title: "Phòng trọ Trường Chinh Cẩm Lệ (vào ở 12-15/10)",
+        addr: "📍 1234 Trường Chinh, P. Hòa Thọ Tây, Cẩm Lệ",
+        price: "2.000.000 đ",
+        priceColor: "#38bdf8",
+        area: "20 m²",
+        district: "Cẩm Lệ",
+        host: "Không chung chủ",
+        raw: '"Phòng mới, thoáng mát mùa hè. Khô ráo, không ngập lụt mùa đông. Ngay ngã 3 Hoà Cầm, thuận tiện giao thông. P/ạ: Tầm ngày 12-15 tháng 10 vào ở là đc."',
+        source: "Nguồn: Chợ Tốt (Nhà Tốt) · Người đăng: HuynhDiem · Cập nhật 18h trước",
+        date: "11/10/2026 (18h trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0902.187.963",
+        link: "https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135029772.htm"
+      },
+      "DN-07": {
+        code: "DN-07",
+        title: "Nhà cấp 4 nguyên căn 130m² có sân vườn kiệt ô tô",
+        addr: "📍 Kiệt ô tô Nguyễn Lương Bằng, P. Hòa Khánh Bắc, Liên Chiểu",
+        price: "2.000.000 đ",
+        priceColor: "#38bdf8",
+        area: "130 m²",
+        district: "Liên Chiểu",
+        host: "Không (Nhà nguyên căn)",
+        raw: '"CHÍNH CHỦ CHO THUÊ NHÀ CẤP 4 NGUYÊN CĂN 130m2 KIỆT OTO NGUYỄN LƯƠNG BẰNG. Nhà có sân vườn rộng rãi thoáng mát, điện nước giá nhà nước."',
+        source: "Nguồn: Chợ Tốt (Nhà Tốt) · Người đăng: Thúy Nga · Cập nhật 2 ngày trước",
+        date: "10/10/2026 (2 ngày trước, &le; 7 ngày)",
+        pet: "Tuyệt vời cho thú cưng (sân vườn 130m²)",
+        phone: "0905.947.460",
+        link: "https://www.nhatot.com/thue-nha-dat-quan-lien-chieu-da-nang/135005246.htm"
+      },
+      "DN-08": {
+        code: "DN-08",
+        title: "Phòng trọ giá rẻ 80-82 Thanh Lương 11, Hòa Xuân",
+        addr: "📍 80-82 Thanh Lương 11, P. Hòa Xuân, Cẩm Lệ",
+        price: "1.700.000 đ",
+        priceColor: "#38bdf8",
+        area: "12 m²",
+        district: "Cẩm Lệ",
+        host: "Không chung chủ",
+        raw: '"Phòng trọ giá rẻ 80-82 Thanh Lương 11, Hòa Xuân có điều hòa nóng lạnh, sân phơi rộng, giờ giấc tự do."',
+        source: "Nguồn: Chợ Tốt (Nhà Tốt) · Người đăng: Hoa Mai · Cập nhật 3 ngày trước",
+        date: "09/10/2026 (3 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0905.033.357",
+        link: "https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135144525.htm"
+      },
+      "DN-09": {
+        code: "DN-09",
+        title: "Phòng trọ có gác lửng bình nóng lạnh 78 Nguyễn Xuân Hữu",
+        addr: "📍 78 Nguyễn Xuân Hữu, P. Hòa Thọ Đông, Cẩm Lệ",
+        price: "2.000.000 đ",
+        priceColor: "#38bdf8",
+        area: "20 m²",
+        district: "Cẩm Lệ",
+        host: "Không chung chủ",
+        raw: '"Cho thuê phòng trọ diện tích 20m2 có gác lửng, khu vực bếp, bình nóng lạnh, sân phơi và để xe riêng. Gần chợ Cẩm Lệ, chợ Hòa Thọ Đông. Đóng 2 tháng không cần cọc."',
+        source: "Nguồn: Phongtro123 (Mã tin #714313) · Người đăng: Trần Thị Thúy · Cập nhật 09/10/2026",
+        date: "09/10/2026 (3 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0975.426.910",
+        link: "https://phongtro123.com/tinh-thanh/da-nang/quan-cam-le"
+      },
+      "DN-10": {
+        code: "DN-10",
+        title: "Phòng trọ 15m² có gác lửng toilet riêng đường Trần Huấn",
+        addr: "📍 Đường Trần Huấn, P. Khuê Trung, Cẩm Lệ",
+        price: "1.900.000 đ",
+        priceColor: "#38bdf8",
+        area: "15 m²",
+        district: "Cẩm Lệ",
+        host: "Không chung chủ",
+        raw: '"Cho thuê phòng trọ diện tích 15m2, có gác lửng, toilet trong phòng, đồng hồ điện nước riêng, không chung chủ, khu an ninh yên tĩnh, gần Mega Market và BV Tâm Trí."',
+        source: "Nguồn: Phongtro123 (Mã tin #302020) · Người đăng: NNQChi · Cập nhật 10/10/2026",
+        date: "10/10/2026 (2 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0983.243.484",
+        link: "https://phongtro123.com/tinh-thanh/da-nang/quan-cam-le"
+      },
+      "DN-11": {
+        code: "DN-11",
+        title: "Phòng trọ giá rẻ khu vực ngay chợ Non Nước",
+        addr: "📍 K35/3 Nam Thành, P. Hòa Hải, Ngũ Hành Sơn",
+        price: "2.000.000 đ",
+        priceColor: "#38bdf8",
+        area: "20 m²",
+        district: "Ngũ Hành Sơn",
+        host: "Không chung chủ",
+        raw: '"Cho thuê phòng trọ giá rẻ ngay chợ Non Nước, gần ĐH CNTT Việt Hàn và ĐH FPT, phòng thoáng mát có cửa sổ, lối để xe rộng, an ninh camera 24/24, wifi miễn phí."',
+        source: "Nguồn: Phongtro123 (Mã tin #593254) · Người đăng: Hồ Thị Kiều Oanh · Cập nhật 04/10/2026",
+        date: "04/10/2026 (8 ngày trước, đang mở thuê)",
+        pet: "Được phép nuôi",
+        phone: "0859.454.850",
+        link: "https://phongtro123.com/tinh-thanh/da-nang/quan-ngu-hanh-son"
+      },
+      "DN-12": {
+        code: "DN-12",
+        title: "Phòng trọ mới sạch sẽ thoáng mát có gác lửng 34/18 Âu Cơ",
+        addr: "📍 34/18 Âu Cơ, P. Hòa Khánh Bắc, Liên Chiểu",
+        price: "1.400.000 đ",
+        priceColor: "#34d399",
+        area: "18 m²",
+        district: "Liên Chiểu",
+        host: "Không chung chủ",
+        raw: '"Phòng trọ mới xây sạch sẽ, ốp lát gạch men, có gác lửng, camera giám sát an ninh tốt, gần chợ và trường đại học. Vui lòng gọi trực tiếp xem phòng, không nhắn tin."',
+        source: "Nguồn: Facebook Group Tìm Phòng Trọ Đà Nẵng · Người đăng: Cô Phước · Hoạt động 10/2026",
+        date: "08/10/2026 (4 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0935.881.723",
+        link: "https://www.facebook.com/groups/timphongtrodanang/"
+      },
+      "DN-13": {
+        code: "DN-13",
+        title: "Phòng trọ căn hộ mới xây có gác full nội thất 26 Hòa Nam 9",
+        addr: "📍 26 Hòa Nam 9, P. Hòa Minh, Liên Chiểu",
+        price: "3.800.000 đ",
+        priceColor: "#f59e0b",
+        area: "28 m²",
+        district: "Liên Chiểu",
+        host: "Không chung chủ",
+        raw: '"Phòng trọ căn hộ mới xây có gác lửng, full nội thất mới 100%: điều hòa, tủ lạnh, máy giặt riêng, nóng lạnh, đạt chuẩn PCCC, camera an ninh 24/24."',
+        source: "Nguồn: Facebook Group Căn Hộ Phòng Trọ Đà Nẵng · Người đăng: Chính chủ · Hoạt động 10/2026",
+        date: "08/10/2026 (4 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0977.200.888",
+        link: "https://www.facebook.com/groups/canhophongtrodanang/"
+      },
+      "DN-14": {
+        code: "DN-14",
+        title: "Phòng mặt tiền tầng 2 sạch sẽ có ban công 51 An Trung Đông 7",
+        addr: "📍 51 An Trung Đông 7, P. An Hải Bắc, Sơn Trà",
+        price: "4.000.000 đ",
+        priceColor: "#f59e0b",
+        area: "20 m²",
+        district: "Sơn Trà",
+        host: "Chung nhà chủ (khóa riêng)",
+        raw: '"Phòng tầng 2 mặt tiền số 51 An Trung Đông 7 cách Võ Văn Kiệt 60m, phòng sáng thoáng có ban công cây xanh, máy lạnh, wifi tốc độ cao, giường lớn và tủ quần áo."',
+        source: "Nguồn: Phongtro123 · Người đăng: Chủ nhà · Cập nhật 10/2026",
+        date: "09/10/2026 (3 ngày trước, &le; 7 ngày)",
+        pet: "Cần hỏi lại chủ",
+        phone: "0768.575.666",
+        link: "https://phongtro123.com/tinh-thanh/da-nang/quan-son-tra"
+      },
+      "DN-16": {
+        code: "DN-16",
+        title: "Phòng trọ 1 gác có cửa sổ thoáng mát đường 3/2",
+        addr: "📍 Đường 3/2, P. Thuận Phước, Hải Châu",
+        price: "4.000.000 đ",
+        priceColor: "#f59e0b",
+        area: "22 m²",
+        district: "Hải Châu",
+        host: "Không chung chủ",
+        raw: '"Phòng 1 gác đường 3/2 Thuận Phước, Hải Châu. Có cửa sổ, điều hòa, tủ lạnh, nóng lạnh, kệ bếp, giặt chung, an ninh tốt. Giá 4 triệu/tháng."',
+        source: "Nguồn: Facebook Group Căn Hộ Phòng Trọ Đà Nẵng · Người đăng: Lâm Tuấn Khang · Hoạt động 10/2026",
+        date: "08/10/2026 (4 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0912.651.312",
+        link: "https://www.facebook.com/groups/canhophongtrodanang/"
+      },
+      "DN-17": {
+        code: "DN-17",
+        title: "Phòng trọ ban công thoáng mát 61 Võ Chí Công",
+        addr: "📍 61 Võ Chí Công, P. Hòa Quý, Ngũ Hành Sơn",
+        price: "4.000.000 đ",
+        priceColor: "#f59e0b",
+        area: "17 m²",
+        district: "Ngũ Hành Sơn",
+        host: "Không chung chủ",
+        raw: '"Phòng có ban công thoáng mát, bếp, điều hòa, tủ lạnh, nóng lạnh, gác lửng, thang máy, bảo vệ 24/24, hầm để xe, giờ tự do."',
+        source: "Nguồn: Phongtro123 (Mã tin #713729) · Người đăng: Bùi Thị Thanh Minh · Cập nhật 28/09/2026",
+        date: "28/09/2026 (Đang mở thuê)",
+        pet: "Được phép nuôi",
+        phone: "0987.876.556",
+        link: "https://phongtro123.com/cho-thue-phong-tro-ban-cong-thoang-mat-713729.html"
+      },
+      "DN-18": {
+        code: "DN-18",
+        title: "Phòng trọ có gác full nội thất khóa từ 30 Đặng Chất",
+        addr: "📍 30 Đặng Chất, P. Hòa Khánh Bắc, Liên Chiểu",
+        price: "3.800.000 đ",
+        priceColor: "#f59e0b",
+        area: "25 m²",
+        district: "Liên Chiểu",
+        host: "Không chung chủ",
+        raw: '"Phòng gác lửng đường 30 Đặng Chất, full nội thất: điều hòa, tủ lạnh, máy giặt, nóng lạnh, máy lọc nước, khóa từ thông minh, giờ tự do."',
+        source: "Nguồn: Facebook Group Tìm Phòng Trọ Đà Nẵng · Người đăng: A. Hảo · Hoạt động 10/2026",
+        date: "09/10/2026 (3 ngày trước, &le; 7 ngày)",
+        pet: "Được phép nuôi",
+        phone: "0349.560.111",
+        link: "https://www.facebook.com/groups/timphongtrodanang/"
+      }
+    };
+
+    // Khởi tạo trạng thái và ghi chú cộng đồng từ LocalStorage
+    let communityStatusMap = {};
+    let communityNotesMap = {};
+    try {
+      communityStatusMap = JSON.parse(localStorage.getItem('danang_rental_status') || '{}');
+      communityNotesMap = JSON.parse(localStorage.getItem('danang_rental_notes') || '{}');
+    } catch (e) {
+      console.warn('LocalStorage not accessible', e);
+    }
+
+    let currentSelectedId = 'DN-15';
+
+    function selectProperty(id) {
+      const data = rentalData[id];
+      if (!data) return;
+      currentSelectedId = id;
+
+      // Update Card highlight
+      document.querySelectorAll('.prop-card').forEach(c => c.classList.remove('active-selected'));
+      const activeCard = document.getElementById('card-' + id);
+      if (activeCard) activeCard.classList.add('active-selected');
+
+      // Update Inspector panel
+      document.getElementById('inspCode').innerText = data.code;
+      document.getElementById('inspTitle').innerText = data.title;
+      document.getElementById('inspAddr').innerText = data.addr;
+      
+      const priceEl = document.getElementById('inspPrice');
+      priceEl.innerText = data.price;
+      priceEl.style.color = data.priceColor;
+
+      document.getElementById('inspArea').innerText = data.area;
+      document.getElementById('inspDist').innerText = data.district;
+      document.getElementById('inspHost').innerText = data.host;
+      document.getElementById('inspRawText').innerText = data.raw;
+      document.getElementById('inspSourceMeta').innerText = data.source;
+      document.getElementById('inspDate').innerHTML = data.date;
+      document.getElementById('inspPet').innerText = data.pet;
+      document.getElementById('inspPhone').innerText = data.phone;
+      document.getElementById('inspCallBtn').href = 'tel:' + data.phone.replace(/[^0-9]/g, '');
+      document.getElementById('inspLinkBtn').href = data.link;
+
+      // Đồng bộ trạng thái kiểm chứng cộng đồng
+      const currentStatus = communityStatusMap[id] || 'available';
+      renderCommunityStatusUI(currentStatus);
+
+      // Đồng bộ ghi chú cộng đồng
+      const savedNote = communityNotesMap[id] || 'Chưa có ai phản hồi báo hết phòng. Bạn có thể gọi kiểm tra trực tiếp.';
+      document.getElementById('inspCommunityNote').innerText = '"' + savedNote.replace(/^"|"$/g, '') + '"';
+      document.getElementById('inputCommunityNote').value = '';
+
+      // Hỗ trợ hiển thị mượt mà trên Mobile (kích hoạt bottom drawer modal)
+      if (window.innerWidth <= 768) {
+        document.getElementById('inspectorPanel').classList.add('mobile-open');
+        const backdrop = document.getElementById('modalBackdrop');
+        if (backdrop) backdrop.classList.add('show');
+      }
+    }
+
+    function renderCommunityStatusUI(status) {
+      const badge = document.getElementById('inspStatusBadge');
+      const btnAvail = document.getElementById('btnStatusAvailable');
+      const btnRes = document.getElementById('btnStatusReserved');
+      const btnRent = document.getElementById('btnStatusRented');
+
+      btnAvail.classList.remove('is-current');
+      btnRes.classList.remove('is-current');
+      btnRent.classList.remove('is-current');
+
+      badge.className = 'community-status-badge';
+
+      if (status === 'rented') {
+        badge.classList.add('status-rented');
+        badge.innerText = '✕ Đã cho thuê';
+        btnRent.classList.add('is-current');
+      } else if (status === 'reserved') {
+        badge.classList.add('status-reserved');
+        badge.innerText = '⏳ Đã đặt cọc';
+        btnRes.classList.add('is-current');
+      } else {
+        badge.classList.add('status-available');
+        badge.innerText = '✓ Đang còn phòng';
+        btnAvail.classList.add('is-current');
+      }
+    }
+
+    function updatePropertyStatus(newStatus) {
+      if (!currentSelectedId) return;
+      communityStatusMap[currentSelectedId] = newStatus;
+      try {
+        localStorage.setItem('danang_rental_status', JSON.stringify(communityStatusMap));
+      } catch (e) {}
+
+      // Cập nhật DOM của card
+      const card = document.getElementById('card-' + currentSelectedId);
+      if (card) {
+        card.setAttribute('data-status', newStatus);
+        card.classList.remove('is-rented', 'is-reserved');
+        if (newStatus === 'rented') card.classList.add('is-rented');
+        if (newStatus === 'reserved') card.classList.add('is-reserved');
+
+        // Cập nhật badge trên card
+        let statusBadge = card.querySelector('.badge-status-pill');
+        if (!statusBadge) {
+          statusBadge = document.createElement('span');
+          statusBadge.className = 'badge badge-status-pill';
+          const badgesContainer = card.querySelector('.thumb-badges');
+          if (badgesContainer) badgesContainer.prepend(statusBadge);
+        }
+
+        if (newStatus === 'rented') {
+          statusBadge.className = 'badge badge-status-pill badge-status-rented';
+          statusBadge.innerText = '✕ Đã thuê';
+          statusBadge.style.display = 'inline-block';
+        } else if (newStatus === 'reserved') {
+          statusBadge.className = 'badge badge-status-pill badge-status-reserved';
+          statusBadge.innerText = '⏳ Đã cọc';
+          statusBadge.style.display = 'inline-block';
+        } else {
+          statusBadge.style.display = 'none';
+        }
+      }
+
+      renderCommunityStatusUI(newStatus);
+      runFilters();
+    }
+
+    function submitCommunityNote() {
+      const input = document.getElementById('inputCommunityNote');
+      const text = input.value.trim();
+      if (!text || !currentSelectedId) return;
+
+      const dateStr = new Date().toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
+      const fullNote = `${text} (Cập nhật: ${dateStr})`;
+      communityNotesMap[currentSelectedId] = fullNote;
+      try {
+        localStorage.setItem('danang_rental_notes', JSON.stringify(communityNotesMap));
+      } catch (e) {}
+
+      document.getElementById('inspCommunityNote').innerText = `"${fullNote}"`;
+      input.value = '';
+    }
+
+    function closeMobileInspector() {
+      const panel = document.getElementById('inspectorPanel');
+      if (panel) panel.classList.remove('mobile-open');
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('show');
+    }
+
+    function runFilters() {
+      const kw = document.getElementById('filterKeyword').value.toLowerCase().trim();
+      const district = document.getElementById('filterDistrict').value;
+      const type = document.getElementById('filterType').value;
+      const price = document.getElementById('filterPrice').value;
+      const area = document.getElementById('filterArea').value;
+      const feature = document.getElementById('filterFeature').value;
+      const statusFilter = document.getElementById('filterStatus') ? document.getElementById('filterStatus').value : 'all';
+
+      const cards = document.querySelectorAll('.prop-card');
+      let visible = 0;
+      let firstVisibleId = null;
+
+      cards.forEach(card => {
+        const id = card.id.replace('card-', '');
+        const search = card.getAttribute('data-search') || '';
+        const cType = card.getAttribute('data-type');
+        const cDistr = card.getAttribute('data-district');
+        const cPrice = card.getAttribute('data-price');
+        const cArea = parseFloat(card.getAttribute('data-area') || 0);
+        const cPet = card.getAttribute('data-pet');
+        const cAc = card.getAttribute('data-ac');
+        const cMezz = card.getAttribute('data-mezzanine');
+        const cPrivate = card.getAttribute('data-private');
+        const cStatus = communityStatusMap[id] || card.getAttribute('data-status') || 'available';
+
+        let ok = true;
+        // 1. Tìm từ khóa
+        if (kw && !search.includes(kw)) ok = false;
+        // 2. Lọc quận
+        if (district !== 'all' && cDistr !== district) ok = false;
+        // 3. Lọc loại hình
+        if (type !== 'all' && cType !== type) ok = false;
+        
+        // 4. Lọc giá
+        if (price === 'under2m' && parseFloat(cPrice) >= 2.0) ok = false;
+        if (price === '2m-3m' && (parseFloat(cPrice) < 2.0 || parseFloat(cPrice) > 3.0)) ok = false;
+        if (price === 'above3m' && parseFloat(cPrice) <= 3.0) ok = false;
+
+        // 5. Lọc diện tích
+        if (area === 'under20' && cArea >= 20) ok = false;
+        if (area === '20-50' && (cArea < 20 || cArea > 50)) ok = false;
+        if (area === 'above50' && cArea <= 50) ok = false;
+
+        // 6. Lọc tiện ích / tính năng
+        if (feature === 'pet' && cPet !== 'yes') ok = false;
+        if (feature === 'ac' && cAc !== 'yes') ok = false;
+        if (feature === 'mezzanine' && cMezz !== 'yes') ok = false;
+        if (feature === 'private' && cPrivate !== 'yes') ok = false;
+
+        // 7. Lọc trạng thái phòng (Còn trống / Đã cọc / Đã thuê)
+        if (statusFilter !== 'all' && cStatus !== statusFilter) ok = false;
+
+        if (ok) {
+          card.style.display = 'flex';
+          visible++;
+          if (!firstVisibleId) firstVisibleId = id;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('activeCount').innerText = visible;
+      const topCount = document.getElementById('topActiveCount');
+      if (topCount) topCount.innerText = visible + ' căn';
+      if (firstVisibleId && window.innerWidth > 768) {
+        selectProperty(firstVisibleId);
+      }
+    }
+
+    function resetAllFilters() {
+      document.getElementById('filterKeyword').value = '';
+      document.getElementById('filterDistrict').value = 'all';
+      document.getElementById('filterType').value = 'all';
+      document.getElementById('filterPrice').value = 'all';
+      document.getElementById('filterArea').value = 'all';
+      document.getElementById('filterFeature').value = 'all';
+      if (document.getElementById('filterStatus')) document.getElementById('filterStatus').value = 'all';
+      runFilters();
+    }
+
+    // Tự động khôi phục giao diện theo dữ liệu đã lưu
+    window.addEventListener('DOMContentLoaded', () => {
+      Object.keys(communityStatusMap).forEach(id => {
+        const card = document.getElementById('card-' + id);
+        const status = communityStatusMap[id];
+        if (card && status) {
+          card.setAttribute('data-status', status);
+          if (status === 'rented') card.classList.add('is-rented');
+          if (status === 'reserved') card.classList.add('is-reserved');
+          
+          if (status !== 'available') {
+            const badgesContainer = card.querySelector('.thumb-badges');
+            if (badgesContainer) {
+              const statusBadge = document.createElement('span');
+              statusBadge.className = status === 'rented' ? 'badge badge-status-pill badge-status-rented' : 'badge badge-status-pill badge-status-reserved';
+              statusBadge.innerText = status === 'rented' ? '✕ Đã thuê' : '⏳ Đã cọc';
+              badgesContainer.prepend(statusBadge);
+            }
+          }
+        }
+      });
+      runFilters();
+    });
+  </script>
+</body>
+</html>

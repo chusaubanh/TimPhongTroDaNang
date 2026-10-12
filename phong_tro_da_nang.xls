@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Center"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="HeaderStyle">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#1F4E79" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="DataStyle">
+   <Alignment ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+   </Borders>
+   <Font ss:FontName="Calibri" ss:Size="10" ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="LinkStyle">
+   <Alignment ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+   </Borders>
+   <Font ss:FontName="Calibri" ss:Size="10" ss:Color="#0563C1" ss:Underline="Single"/>
+  </Style>
+  <Style ss:ID="HighlightScore">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" ss:Color="#D9D9D9"/>
+   </Borders>
+   <Font ss:FontName="Calibri" ss:Size="11" ss:Color="#006100" ss:Bold="1"/>
+   <Interior ss:Color="#C6EFCE" ss:Pattern="Solid"/>
+  </Style>
+ </Styles>
+
+ <!-- SHEET 1 -->
+ <Worksheet ss:Name="Du_Lieu_Goc_Va_Binh_Luan">
+  <Table ss:DefaultRowHeight="24">
+   <Column ss:Width="60"/>
+   <Column ss:Width="320"/>
+   <Column ss:Width="180"/>
+   <Column ss:Width="160"/>
+   <Column ss:Width="120"/>
+   <Column ss:Width="110"/>
+   <Column ss:Width="160"/>
+   <Column ss:Width="280"/>
+   <Row ss:Height="28">
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Mã Tin</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Tiêu Đề / Nội Dung Quét Được</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Nguồn Quét</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Link Nguồn (Click để mở)</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Người Đăng / SĐT</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Giá Đề Xuất</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Địa Điểm</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Bình Luận / Đánh Giá Bước Đầu</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">RAW-01</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Nhà cấp 4 nguyên căn 72m2 chưa nội thất, thuê lâu dài, độc lập</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Facebook Group Nhà Nguyên Căn</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.facebook.com/groups/nhanguyencandanang/posts/1805499813997673/"><Data ss:Type="String">Mở bài đăng FB (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0935835858</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">2.0 - 2.3 triệu/tháng</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">23/11 Ngô Gia Tự, Hải Châu 1</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">TIN THẬT TỪ GROUP FB. Nhà cấp 4 nguyên căn 72m2, nuôi 3 mèo cực kỳ thoải mái</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">RAW-02</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ tttp đường Hoàng Diệu sạch sẽ thoáng mát giờ giấc tự do</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Chợ Tốt (Nhà Tốt)</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-hai-chau-da-nang/135184466.htm"><Data ss:Type="String">Mở Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0905442380</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">2.000.000 đ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">368/63 Hoàng Diệu, Hải Châu</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Cập nhật 1h trước, cách 222 NHT ~2.0km, WC riêng khép kín, giờ tự do</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">RAW-03</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Cho thuê phòng trọ đường Tiểu La có điều hòa, máy nước nóng, máy giặt</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Chợ Tốt (Nhà Tốt)</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-hai-chau-da-nang/135136690.htm"><Data ss:Type="String">Mở Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0359785499</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">2.300.000 đ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">29 Tiểu La, Hòa Cường Bắc</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Sát 222 NHT (~1.2km), có điều hòa và máy giặt riêng, giờ giấc tự do</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">RAW-04</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">PHÒNG TRỌ MẶT TIỀN GIÁ RẺ HÒA XUÂN có gác lửng, điện nước giá nhà nước</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Chợ Tốt (Nhà Tốt)</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135167366.htm"><Data ss:Type="String">Mở Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0902554244</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">1.800.000 đ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">47 Lương Khắc Ninh, Cẩm Lệ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Mặt tiền lối đi riêng, gác lửng thoáng mát nuôi mèo tốt, giá 1.8M</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">RAW-05</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ cho thuê thoáng mát và tiện nghi Thanh Khê, đúc lửng, bếp riêng</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Chợ Tốt (Nhà Tốt)</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-thanh-khe-da-nang/134520153.htm"><Data ss:Type="String">Mở Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0935184357</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">2.200.000 đ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Đường Thanh Tân, Thanh Khê</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Đúc lửng, bếp và WC riêng sạch sẽ, để xe rộng rãi, không chung chủ</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">RAW-06</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ Trường Chinh , Cẩm Lệ, 20m2 khu cao ráo không ngập</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Chợ Tốt (Nhà Tốt)</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135029772.htm"><Data ss:Type="String">Mở Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0902187963</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">2.000.000 đ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">1234 Trường Chinh, Cẩm Lệ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Ngay ngã 3 Hòa Cầm, nhận phòng ngay 12-15/10, giờ tự do</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">RAW-07</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">CHÍNH CHỦ CHO THUÊ NHÀ CẤP 4 NGUYÊN CĂN 130m2 KIỆT OTO NGUYỄN LƯƠNG BẰNG</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Chợ Tốt (Nhà Tốt)</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-nha-dat-quan-lien-chieu-da-nang/135005246.htm"><Data ss:Type="String">Mở Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0905947460</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">2.000.000 đ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Kiệt ô tô Nguyễn Lương Bằng</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Nhà cấp 4 nguyên căn 130m2 có sân vườn rộng, giá 2.0M rẻ hiếm có, cực kỳ lý tưởng nuôi 3 mèo</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">RAW-08</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ giá rẻ 80-82 Thanh Lương 11, Hòa Xuân có điều hòa</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Chợ Tốt (Nhà Tốt)</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135144525.htm"><Data ss:Type="String">Mở Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0905033357</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">1.700.000 đ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">80-82 Thanh Lương 11, Cẩm Lệ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Giá 1.7M, điều hòa, nước nóng, sân phơi, không chung chủ</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+
+ <!-- SHEET 2 -->
+ <Worksheet ss:Name="Danh_Sach_Phong_Dat_Chuan">
+  <Table ss:DefaultRowHeight="24">
+   <Column ss:Width="50"/>
+   <Column ss:Width="260"/>
+   <Column ss:Width="160"/>
+   <Column ss:Width="90"/>
+   <Column ss:Width="90"/>
+   <Column ss:Width="130"/>
+   <Column ss:Width="90"/>
+   <Column ss:Width="70"/>
+   <Column ss:Width="130"/>
+   <Column ss:Width="90"/>
+   <Column ss:Width="80"/>
+   <Column ss:Width="120"/>
+   <Column ss:Width="110"/>
+   <Column ss:Width="140"/>
+   <Column ss:Width="80"/>
+   <Column ss:Width="70"/>
+   <Column ss:Width="180"/>
+   <Row ss:Height="28">
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Mã Tin</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Tiêu Đề / Tên Phòng</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Địa Chỉ Chi Tiết</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Quận</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Khoảng Cách (~km)</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Loại Hình</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Giá Thuê (đ)</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">DT (m2)</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Nuôi Mèo</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Chung Chủ?</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Giờ Giấc</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Tình Trạng</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">SĐT Liên Hệ</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Link Tin Đăng (Click vào)</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Ngày Cập Nhật</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Điểm /10</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Phân Loại Đạt Chuẩn</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">DN-01</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Nhà cấp 4 nguyên căn 72m2 (FB Group Nhà Nguyên Căn ĐN)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Số 23/11 Ngô Gia Tự, P. Hải Châu 1</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Hải Châu</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">~3.5 km</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Nhà cấp 4 nguyên căn</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">2200000</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">72</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Rất tốt (nhà riêng 72m2)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Không chung chủ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Tự do 24/7</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">CÒN NHÀ (Đăng 16h)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0935835858</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.facebook.com/groups/nhanguyencandanang/posts/1805499813997673/"><Data ss:Type="String">Xem Tin FB (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">11/10/2026</Data></Cell>
+    <Cell ss:StyleID="HighlightScore"><Data ss:Type="Number">9.8</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">ĐẠT LOẠI 1 (RẤT ƯU TIÊN - NHÀ C4)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">DN-02</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ tttp đường Hoàng Diệu sạch sẽ thoáng mát</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">368/63 Đường Hoàng Diệu, Bình Thuận</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Hải Châu</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">~2.0 km</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng riêng khép kín</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">2000000</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">15</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Được phép</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Không chung chủ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Tự do 24/7</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">CÒN PHÒNG (Mới 1h)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0905442380</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-hai-chau-da-nang/135184466.htm"><Data ss:Type="String">Xem Tin Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">12/10/2026</Data></Cell>
+    <Cell ss:StyleID="HighlightScore"><Data ss:Type="Number">9.6</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">ĐẠT LOẠI 1 (RẤT ƯU TIÊN)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">DN-03</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Cho thuê phòng trọ đường Tiểu La có điều hòa máy giặt</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">29 Đường Tiểu La, Hòa Cường Bắc</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Hải Châu</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">~1.2 km</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng riêng có điều hòa</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">2300000</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Được phép</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Không chung chủ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Tự do 24/7</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">CÒN PHÒNG (Sát NHT)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0359785499</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-hai-chau-da-nang/135136690.htm"><Data ss:Type="String">Xem Tin Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">09/10/2026</Data></Cell>
+    <Cell ss:StyleID="HighlightScore"><Data ss:Type="Number">9.5</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">ĐẠT LOẠI 1 (RẤT ƯU TIÊN - GẦN NHẤT)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">DN-04</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ mặt tiền giá rẻ Hòa Xuân có gác lửng</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">47 Đường Lương Khắc Ninh, Hòa Xuân</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Cẩm Lệ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">~5.5 km</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng mặt tiền có gác</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">1800000</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">25</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Rất tốt (lối đi riêng có gác)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Không chung chủ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Tự do 24/7</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">CÒN PHÒNG</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0902554244</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135167366.htm"><Data ss:Type="String">Xem Tin Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">10/10/2026</Data></Cell>
+    <Cell ss:StyleID="HighlightScore"><Data ss:Type="Number">9.4</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">ĐẠT LOẠI 1 (RẤT ƯU TIÊN)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">DN-05</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ cho thuê thoáng mát và tiện nghi Thanh Khê</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Đường Thanh Tân, Thanh Khê Đông</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Thanh Khê</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">~4.5 km</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng đúc lửng tầng trệt</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">2200000</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Được phép</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Không chung chủ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Tự do 24/7</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">CÒN PHÒNG</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0935184357</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-thanh-khe-da-nang/134520153.htm"><Data ss:Type="String">Xem Tin Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">09/10/2026</Data></Cell>
+    <Cell ss:StyleID="HighlightScore"><Data ss:Type="Number">9.2</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">ĐẠT LOẠI 1 (RẤT ƯU TIÊN)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">DN-06</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ Trường Chinh Cẩm Lệ khu cao ráo</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">1234 Đường Trường Chinh, Cẩm Lệ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Cẩm Lệ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">~5.0 km</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng riêng khép kín</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">2000000</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Được phép</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Không chung chủ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Tự do 24/7</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">CÒN PHÒNG (Vào ở 12-15/10)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0902187963</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135029772.htm"><Data ss:Type="String">Xem Tin Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">11/10/2026</Data></Cell>
+    <Cell ss:StyleID="HighlightScore"><Data ss:Type="Number">9.1</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">ĐẠT LOẠI 1 (RẤT ƯU TIÊN)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">DN-07</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Nhà cấp 4 nguyên căn 130m2 có sân vườn kiệt ô tô</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Kiệt ô tô Nguyễn Lương Bằng, Hòa Khánh Bắc</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Liên Chiểu</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">~9.0 km</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Nhà C4 nguyên căn sân vườn</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">2000000</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">130</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Tuyệt vời (sân vườn 130m2)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Không chung chủ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Tự do 24/7</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">CÒN NHÀ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0905947460</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-nha-dat-quan-lien-chieu-da-nang/135005246.htm"><Data ss:Type="String">Xem Tin Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">10/10/2026</Data></Cell>
+    <Cell ss:StyleID="HighlightScore"><Data ss:Type="Number">9.3</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">ĐẠT LOẠI 1 (RẤT ƯU TIÊN - NHÀ C4)</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">DN-08</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ giá rẻ 80-82 Thanh Lương 11 Hòa Xuân</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">80-82 Thanh Lương 11, Hòa Xuân</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Cẩm Lệ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">~5.0 km</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Phòng trọ riêng khép kín</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">1700000</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="Number">12</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Được phép</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Không chung chủ</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">Tự do 24/7</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">CÒN PHÒNG</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">0905033357</Data></Cell>
+    <Cell ss:StyleID="LinkStyle" ss:HRef="https://www.nhatot.com/thue-phong-tro-quan-cam-le-da-nang/135144525.htm"><Data ss:Type="String">Xem Tin Chợ Tốt (Click)</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">09/10/2026</Data></Cell>
+    <Cell ss:StyleID="HighlightScore"><Data ss:Type="Number">8.8</Data></Cell>
+    <Cell ss:StyleID="DataStyle"><Data ss:Type="String">ĐẠT LOẠI 2 (ĐẠT TIÊU CHUẨN)</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+</Workbook>
